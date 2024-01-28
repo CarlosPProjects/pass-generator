@@ -1,7 +1,7 @@
 const Header = () => {
   return (
-    <header className="px-4 sm:px-8 py-4 flex justify-between gap-8">
-        <span className="text-2xl font-bold">
+    <header className="p-8 flex justify-between gap-8">
+        <span className="text-3xl font-semibold text-blue-500">
             Stoodiow
         </span>
     </header>

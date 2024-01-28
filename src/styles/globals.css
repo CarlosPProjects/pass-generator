@@ -2,10 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+:root{
+    --primary: #3b82f6;
+    --secondary: #262626;
+    --text-light: #262626;
+    --background-light: #f2f3f0;
+
+}
 
 
 @layer base{
     body{
-        @apply bg-[#f2f3f0] text-neutral-700
+        @apply bg-[#f2f3f0] 
     }
 }
