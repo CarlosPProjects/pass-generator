@@ -4,15 +4,13 @@
 
 :root{
     --primary: #3b82f6;
-    --secondary: #262626;
-    --text-light: #262626;
-    --background-light: #f2f3f0;
-
+    --secondary: #f2f2f2;
+    --body: #222222;
 }
 
 
 @layer base{
     body{
-        @apply bg-[#f2f3f0] 
+        @apply bg-hero-pattern bg-no-repeat bg-cover bg-center text-body
     }
 }
