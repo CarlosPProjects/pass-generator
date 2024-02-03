@@ -1,6 +1,6 @@
 "use client"
 
-import { generatePassword } from "@/utils/generatePass";
+import { arrChars, generatePassword } from "@/utils/generatePass";
 import { useEffect, useState } from "react";
 import { cn } from "@/libs/utils";
 
@@ -11,7 +11,7 @@ const Generator = () => {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setPassword(generatePassword())
+        setPassword(generatePassword({ characters: arrChars, length: 12 }));
         setIsCopied(false)
     }
 
@@ -23,7 +23,7 @@ const Generator = () => {
     }
 
     useEffect(() => {
-        setPassword(generatePassword());
+        setPassword(generatePassword({ characters: arrChars, length: 12 }));
     }, [])
 
     return (
