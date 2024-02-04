@@ -24,6 +24,7 @@ const Generator = () => {
     let password = new Password({ ...options });
 
     setPassword(password.generate());
+    setIsCopied(false);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -60,7 +61,7 @@ const Generator = () => {
             name="password"
             placeholder={password}
             readOnly
-            className="flex-1 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none"
+            className={cn("flex-1 appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none", isCopied ? "placeholder:text-green-500" : "")}
           />
           <svg
             onClick={copyToClipboard}
@@ -100,7 +101,7 @@ const Generator = () => {
             className="w-4 h-4"
             onChange={() => setHasUppercase(!hasUppercase)}
           />
-          <label htmlFor="uppercase">Uppercase</label>
+          <label htmlFor="uppercase" className={cn("cursor-pointer font-base", hasUppercase ? "text-primary" : "text-gray-500/70")}>Uppercase</label>
         </div>
         <div className="space-x-1 flex items-center">
           <input
@@ -112,7 +113,7 @@ const Generator = () => {
             className="w-4 h-4"
             onChange={() => setHasLowercase(!hasLowercase)}
           />
-          <label htmlFor="lowercase">Lowercase</label>
+          <label htmlFor="lowercase" className={cn("cursor-pointer font-base", hasLowercase ? "text-primary" : "text-gray-500/70")}>Lowercase</label>
         </div>
         <div className="space-x-1 flex items-center">
           <input
@@ -124,7 +125,7 @@ const Generator = () => {
             className="w-4 h-4"
             onChange={() => setHasNumbers(!hasNumbers)}
           />
-          <label htmlFor="numbers">Numbers</label>
+          <label htmlFor="numbers" className={cn("cursor-pointer font-base", hasNumbers ? "text-primary" : "text-gray-500/70")}>Numbers</label>
         </div>
         <div className="space-x-1 flex items-center">
           <input
@@ -136,7 +137,7 @@ const Generator = () => {
             className="w-4 h-4"
             onChange={() => setHasSymbols(!hasSymbols)}
           />
-          <label htmlFor="symbols">Symbols</label>
+          <label htmlFor="symbols" className={cn("cursor-pointer font-base", hasSymbols ? "text-primary" : "text-gray-500/70")}>Symbols</label>
         </div>
       </div>
     </>
