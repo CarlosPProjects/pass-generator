@@ -8,16 +8,27 @@ const Generator = () => {
   const [password, setPassword] = useState<string>();
   const [isCopied, setIsCopied] = useState<boolean>(false);
 
+  const [hasLowercase, setHasLowercase] = useState<boolean>(true);
+  const [hasUppercase, setHasUppercase] = useState<boolean>(true);
+  const [hasNumbers, setHasNumbers] = useState<boolean>(true);
+  const [hasSymbols, setHasSymbols] = useState<boolean>(true);
+
+  const generatePassword = () => {
+    const options = {
+      length: 12,
+      lowercase: hasLowercase,
+      uppercase: hasUppercase,
+      numbers: hasNumbers,
+      symbols: hasSymbols,
+    };
+    let password = new Password({ ...options });
+
+    setPassword(password.generate());
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const pass = new Password({
-      uppercase: true,
-      lowercase: false,
-      numbers: true,
-      symbols: true,
-    });
-    setPassword(pass.generate());
-    setIsCopied(false);
+    generatePassword();
   };
 
   const copyToClipboard = async () => {
@@ -28,14 +39,8 @@ const Generator = () => {
   };
 
   useEffect(() => {
-    const pass = new Password({
-      uppercase: true,
-      lowercase: true,
-      numbers: true,
-      symbols: true,
-    });
-    setPassword(pass.generate());
-  }, []);
+    generatePassword();
+  }, [hasLowercase, hasUppercase, hasNumbers, hasSymbols]);
 
   return (
     <>
@@ -93,6 +98,7 @@ const Generator = () => {
             defaultValue={1}
             defaultChecked
             className="w-4 h-4"
+            onChange={() => setHasUppercase(!hasUppercase)}
           />
           <label htmlFor="uppercase">Uppercase</label>
         </div>
@@ -104,6 +110,7 @@ const Generator = () => {
             defaultValue={1}
             defaultChecked
             className="w-4 h-4"
+            onChange={() => setHasLowercase(!hasLowercase)}
           />
           <label htmlFor="lowercase">Lowercase</label>
         </div>
@@ -115,6 +122,7 @@ const Generator = () => {
             defaultValue={1}
             defaultChecked
             className="w-4 h-4"
+            onChange={() => setHasNumbers(!hasNumbers)}
           />
           <label htmlFor="numbers">Numbers</label>
         </div>
@@ -126,6 +134,7 @@ const Generator = () => {
             defaultValue={1}
             defaultChecked
             className="w-4 h-4"
+            onChange={() => setHasSymbols(!hasSymbols)}
           />
           <label htmlFor="symbols">Symbols</label>
         </div>
