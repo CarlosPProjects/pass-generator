@@ -6,7 +6,7 @@ type Options = {
     length?: number;
 }
 
-class Password {
+export default class Password {
     lowercase: string;
     uppercase: string;
     numbers: string;
