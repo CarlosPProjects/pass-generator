@@ -12,6 +12,7 @@ const Generator = () => {
   const [hasUppercase, setHasUppercase] = useState<boolean>(true);
   const [hasNumbers, setHasNumbers] = useState<boolean>(true);
   const [hasSymbols, setHasSymbols] = useState<boolean>(true);
+  const [noneSelected, setNoneSelected] = useState<boolean>(false);
 
   const generatePassword = () => {
     const options = {
@@ -23,8 +24,14 @@ const Generator = () => {
     };
     let password = new Password({ ...options });
 
-    setPassword(password.generate());
-    setIsCopied(false);
+    if (password.getOptionLength() > 0) {
+      setPassword(password.generate());
+      setIsCopied(false)
+      setNoneSelected(false);
+    } else {
+      setNoneSelected(true);
+    }
+
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -85,7 +92,8 @@ const Generator = () => {
         </div>
         <button
           type="submit"
-          className="rounded-xl border-1 bg-primary py-4 px-6 text-xl text-white font-semibold"
+          disabled={noneSelected}
+          className={cn("rounded-xl border-1 bg-primary py-4 px-6 text-xl text-white font-semibold", noneSelected ? "opacity-50 cursor-not-allowed" : "")}
         >
           Generate
         </button>
